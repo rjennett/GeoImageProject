@@ -1,3 +1,6 @@
+<!-- This map.ejs is the intended replacement for map.jade
+App fuctions with map.jade but not yet with this map.ejs -->
+
 <% include partials/header %>
 
 <div id="mapContainer" style="margin: 30px;">
@@ -5,6 +8,7 @@
 </div>
 
 <script>
+    // error returned, jsonData not defined
     var myData = JSON.stringify(jsonData);
         // Create variable to hold map element, give initial settings to map
         var map = L.map('map',{ center: [39.8283, -98.5795], zoom: 4});

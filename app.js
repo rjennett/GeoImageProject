@@ -45,7 +45,7 @@ app.get('/map', function(req, res) {
     // Pass the result to the map page
     query.on("end", function (result) {
         var data = result.rows[0].row_to_json // Save the JSON as variable data
-        res.render('map.ejs', {
+        res.render('map.jade', {
             title: "GeoImage Map", // Give a title to our page
             jsonData: data // Pass data to the View
         });
