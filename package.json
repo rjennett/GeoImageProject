@@ -4,15 +4,22 @@
   "description": "Display geotagged image locations on a web map",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "frontend": "http-server -a localhost --cors -o",
+    "backend": "nodemon app.js",
+    "dev": "concurrently \"npm run frontend\" \"npm run backend\""
   },
   "author": "Ryan Jennett",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "http-server": "^0.11.1",
     "jade": "^1.11.0",
     "localtunnel": "^1.9.1",
+    "nodemon": "^1.19.0",
     "pg": "^7.10.0",
     "pug": "^2.0.3"
   }

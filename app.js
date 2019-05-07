@@ -1,6 +1,13 @@
 var express = require("express");
 var app = express();
 
+// Enable CORS - cross origin requests - so frontend can talk to backend
+var cors = require('cors')
+var corsOptions = {
+  origin: 'localhost:8080',
+  optionsSuccessStatus: 200
+}
+app.use(cors())
 
 app.set("view engine", "ejs");
 app.set("view engine", "jade");
@@ -58,8 +65,95 @@ app.get("/", function(req, res){
         title: "Welcome to GeoImage!"
     });
   });
+
+// Frontend will make a call to the API and we just send back dummy data
+// This is where you would query the db and send back the results
+app.get("/testData", function(req, res) {
+  res.send({
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -119.091796875,
+            43.004647127794435
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -110.390625,
+            38.685509760012
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -101.6015625,
+            45.213003555993964
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -92.197265625,
+            35.38904996691167
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -84.990234375,
+            42.87596410238256
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -82.6171875,
+            31.353636941500987
+          ]
+        }
+      },
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": {
+          "type": "Point",
+          "coordinates": [
+            -105.556640625,
+            32.54681317351514
+          ]
+        }
+      }
+    ]
+  })
+})
   
-  // Start server on localhost:3000
-  app.listen(3000, function(req, res){
-    console.log("The Great GeoImageProject server has started!");
-  });
+// Start server on localhost:3000
+app.listen(3000, function(req, res){
+  console.log("The Great GeoImageProject server has started!");
+});
