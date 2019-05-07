@@ -4,6 +4,7 @@ var app = express();
 
 app.set("view engine", "ejs");
 app.set("view engine", "jade");
+app.engine('html', require('ejs').renderFile);
 
 
 /* PostgreSQL and PostGIS module and connection setup */
@@ -45,12 +46,33 @@ app.get('/map', function(req, res) {
     // Pass the result to the map page
     query.on("end", function (result) {
         var data = result.rows[0].row_to_json // Save the JSON as variable data
-        res.render('map.jade', {
+        res.render('map.ejs', {
             title: "GeoImage Map", // Give a title to our page
             jsonData: data // Pass data to the View
         });
     });
   });
+
+//render index.html with map
+app.get('/index', function(req, res){
+  res.render("index.html", {title: "Index Page"});
+
+  //following copied from map route
+  var client = new Client(conString); // Setup our Postgres Client
+    client.connect(); // connect to the client
+    var query = client.query(new Query(image_query)); // Run our Query
+    query.on("row", function (row, result) {
+        result.addRow(row);
+    });
+    // Pass the result to the map page
+    query.on("end", function (result) {
+        var data = result.rows[0].row_to_json // Save the JSON as variable data
+        res.render('map.ejs', {
+            title: "GeoImage Map", // Give a title to our page
+            jsonData: data // Pass data to the View
+        });
+    });
+});
 
   // Root route
 app.get("/", function(req, res){

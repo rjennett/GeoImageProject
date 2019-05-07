@@ -9,7 +9,7 @@ App fuctions with map.jade but not yet with this map.ejs -->
 
 <script>
     // error returned, jsonData not defined
-    var myData = JSON.stringify(jsonData);
+    var myData = (JSON.stringify(jsonData));
         // Create variable to hold map element, give initial settings to map
         var map = L.map('map',{ center: [39.8283, -98.5795], zoom: 4});
         // Add OpenStreetMap tile layer to map element

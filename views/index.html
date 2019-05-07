@@ -9,7 +9,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js" type="text/javascript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.4/jquery-ui.min.js"></script>
-    <title>The Great Webmap!</title>
+    <title>title</title>
 </head>
     <body>
         <nav>
@@ -19,3 +19,22 @@
                 <li><a href="/data">Data Page</a></li>
             </ul>
         </nav>
+        <div id="mapContainer" style="margin: 30px;">
+            <div id="map" style="height: 50em"></div>
+        </div>
+        
+        <script>
+            var myData = JSON.parse(JSON.stringify(jsonData));
+                // Create variable to hold map element, give initial settings to map
+                var map = L.map('map',{ center: [39.8283, -98.5795], zoom: 4});
+                // Add OpenStreetMap tile layer to map element
+                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>' }).addTo(map);
+                // Add JSON to map
+                L.geoJson(myData,{
+                    onEachFeature: function (feature, layer) {
+                        layer.bindPopup(feature.properties.f2);
+                    }
+                }).addTo(map);
+        </script>
+    </body>
+</html>
